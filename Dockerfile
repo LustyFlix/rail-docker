@@ -5,11 +5,12 @@ RUN apt-get update && apt-get install -y \
     ttyd \
     curl \
     git \
+    vim \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up an environment variable for the port Railway will assign
 ENV PORT=8080
 EXPOSE 8080
 
-# Start ttyd and bind it to a bash shell
-CMD ["sh", "-c", "ttyd -p $PORT bash"]
+# CRITICAL FIX: Added the -W flag to make the terminal writable
+CMD ["sh", "-c", "ttyd -W -p $PORT bash"]
